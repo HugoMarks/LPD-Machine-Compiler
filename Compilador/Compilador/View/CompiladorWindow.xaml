@@ -1,0 +1,76 @@
+﻿<Window x:Class="Compilador.CompiladorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Compilador"
+        mc:Ignorable="d"
+        Title="Compilador" Height="622.8" Width="800" WindowStartupLocation="CenterScreen" Cursor="Arrow" ForceCursor="True" ResizeMode="NoResize" WindowStyle="None" MouseDown="WindowMouseDown">
+    <Grid HorizontalAlignment="Left" Width="800" Height="623" VerticalAlignment="Top" Background="#FFD4D4D4">
+        <Rectangle HorizontalAlignment="Left" Height="64" Stroke="Black" VerticalAlignment="Bottom" Width="800" Margin="0,0,0,559" StrokeThickness="2">
+            <Rectangle.Effect>
+                <DropShadowEffect BlurRadius="20" Color="#FF716767" ShadowDepth="6"/>
+            </Rectangle.Effect>
+            <Rectangle.Fill>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFE9EFF6"/>
+                    <GradientStop Color="#FFD7D9DC" Offset="1"/>
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+        <Image x:Name="minimizarWindow" HorizontalAlignment="Left" Height="30" Margin="713,19,0,0" VerticalAlignment="Top" Width="30" Source="/Compilador;component/Images/minimizarWindow.png" MouseLeftButtonDown="MinimizarAppMouseLeftButtonDown" ToolTip="Minimizar"/>
+        <Image x:Name="novoArquivo" Height="40" Margin="68,10,0,0" Width="40" Source="/Compilador;component/Images/newFile.png" HorizontalAlignment="Left" VerticalAlignment="Top" ToolTip="Novo Arquivo" MouseLeftButtonDown="NovoArquivoMouseLeftButtonDown"/>
+        <Image x:Name="image" HorizontalAlignment="Left" Height="45" Margin="644,9,0,0" VerticalAlignment="Top" Width="45" Source="/Compilador;component/Images/computer2.png" Cursor="Arrow" ToolTip="Sobre" RenderTransformOrigin="1.396,0.418" MouseLeftButtonDown="BotaoSobre_MouseLeftButtonDown"/>
+        <Image x:Name="salvarArquivo" Height="40" Margin="179,9,0,0" Width="40" Source="/Compilador;component/Images/saveFile.png" HorizontalAlignment="Left" VerticalAlignment="Top" ToolTip="Salvar Arquivo" RenderTransformOrigin="0.58,0.255" MouseLeftButtonDown="SalvarArquivoMouseLeftButtonDown"/>
+        <Image x:Name="fecharArquivo" Height="40" Margin="123,9,0,0" Width="40" Source="/Compilador;component/Images/closeFile.png" HorizontalAlignment="Left" VerticalAlignment="Top" ToolTip="Apagar Arquivo" RenderTransformOrigin="0.04,0.475" MouseLeftButtonDown="FecharArquivoMouseLeftButtonDown"/>
+        <Image x:Name="compilarArquivo" Height="40" Margin="236,9,0,0" Width="40" Source="/Compilador;component/Images/start.png" HorizontalAlignment="Left" VerticalAlignment="Top" MouseLeftButtonDown="CompilarArquivoMouseLeftButtonDown" ToolTip="Iniciar Compilação"/>
+        <Image x:Name="abrirArquivo" Height="40" Margin="10,9,0,0" Width="40" Source="/Compilador;component/Images/openFile.png" HorizontalAlignment="Left" VerticalAlignment="Top" MouseLeftButtonDown="AbrirArquivoMouseLeftButtonDown" ToolTip="Abrir Arquivo"/>
+        <TabControl x:Name="tabComandos" HorizontalAlignment="Left" Height="444" Margin="10,86,0,0" VerticalAlignment="Top" Width="780" Background="#FFB7B1B1">
+            <TabItem Header="NewFile.lpd">
+                <Grid Background="#FFD4D4D4">
+                    <avalonEdit:TextEditor
+                        xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
+				        Name="textBoxComandos"
+				        FontFamily="Consolas"
+                        ShowLineNumbers="true"
+				        FontSize="10pt"
+				        SyntaxHighlighting="LPD" KeyDown="textBoxComandosKeyDown" KeyUp="textBoxComandosKeyUp" >
+                    </avalonEdit:TextEditor>
+
+                    <!--<TextBox x:Name="textBoxComandos"
+                             VerticalScrollBarVisibility="Auto"
+                              HorizontalAlignment="Left"
+                             IsReadOnly="False"
+                             Height="380.839" 
+                             Text="" VerticalAlignment="Top" Width="775" HorizontalScrollBarVisibility="Auto" UseLayoutRounding="False" AcceptsReturn="True" AcceptsTab="True" FontWeight="Medium" Margin="0.2,0,0,0" KeyDown="textBoxComandosKeyDown"/>-->
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <TabControl x:Name="tabErros" HorizontalAlignment="Left" Height="67" Margin="10,546,0,0" VerticalAlignment="Top" Width="780" Background="#FFB7B1B1">
+            <TabItem Header="Erro Encontrado">
+                <TabItem.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                        <GradientStop Color="#FFF0F0F0" Offset="0"/>
+                        <GradientStop Color="#FFE3E3E3" Offset="1"/>
+                    </LinearGradientBrush>
+                </TabItem.Background>
+                <Grid Background="#FFE5E5E5">
+                    <ListBox x:Name="listBoxErros" HorizontalAlignment="Left" Height="40" VerticalAlignment="Top" Width="775" BorderBrush="#FF6C8CED"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <Image x:Name="image_fundo" HorizontalAlignment="Center" Height="420" Margin="110,128,162,75" VerticalAlignment="Center" Width="528" Source="/Compilador;component/Images/compilador.png"/>
+        <TextBlock x:Name="label1" HorizontalAlignment="Left" TextWrapping="Wrap" Width="229" FontSize="32" FontWeight="ExtraBold" RenderTransformOrigin="0.509,1.097" Cursor="Arrow" Text="Compilador" Margin="371,218,0,355" FontFamily="Showcard Gothic" Foreground="#FF736D6D"/>
+        <TextBlock x:Name="label2" TextWrapping="Wrap" Width="127" FontSize="64" FontWeight="ExtraBold" RenderTransformOrigin="0.509,1.097" Cursor="Arrow" Text="CSD" Height="93" FontFamily="Showcard Gothic" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="413,0,260,257" Foreground="#FF736D6D"/>
+
+        <Expander x:Name="expanderTokens" Header="Mostrar Tokens" HorizontalAlignment="Left" Margin="605,69,0,0" VerticalAlignment="Top" Cursor="None" Width="185" Height="429">
+            <DataGrid x:Name="dataGridTokens" Height="399" VerticalAlignment="Top" Margin="0,0,-2,0" IsSynchronizedWithCurrentItem="True" IsReadOnly="True" CanUserSortColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Lexema}" ClipboardContentBinding="{x:Null}" Header="Lexema" MinWidth="80" Width="80"/>
+                    <DataGridTextColumn Binding="{Binding Simbolo}" ClipboardContentBinding="{x:Null}" Header="Símbolo" MinWidth="80" Width="80"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Expander>
+        <Image x:Name="fecharWindow" HorizontalAlignment="Left" Height="30" Margin="760,10,0,0" VerticalAlignment="Top" Width="30" Source="/Compilador;component/Images/closeWindow.png" MouseLeftButtonDown="FecharAppMouseLeftButtonDown" ToolTip="Fechar"/>
+    </Grid>
+</Window>
